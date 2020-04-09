@@ -184,7 +184,12 @@ function main() {
                     });
 
                     var buttonContainer = e.querySelector('div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)');
-                    if (buttonContainer) {
+                    if (
+                        buttonContainer &&
+                        buttonContainer.children.length === 2 &&
+                        buttonContainer.children[0].tagName === 'SPAN' &&
+                        buttonContainer.children[1].tagName === 'SPAN'
+                    ) {
                         buttonContainer.style = 'display: inline-block;';
 
                         buttonContainer.parentElement.style = 'display: inline-block; width: unset; opacity: 1;';
@@ -210,10 +215,7 @@ function debounce(fn, delay) {
     }
 }
 
-if(window.location.href.match(/^https:\/\/chat.google.com/)) {
-    addStyle();
-    main();
-}
-
+addStyle();
+main();
 var el = document.documentElement;
 el.addEventListener('DOMSubtreeModified', debounce(main, 1000));
