@@ -120,25 +120,6 @@ function addStyle() {
     document.head.appendChild(styleElement);
 }
 
-function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-}
-
-function addClass(e, cls) {
-    var classes = e.className.split(' ');
-    classes.push(cls);
-    e.className = classes.filter(onlyUnique).join(' ');
-}
-
-function removeClass(e, cls) {
-    var classes = e.className.split(' ');
-    var filteredClasses = classes.filter(function(value) {
-        return value !== cls;
-    });
-
-    e.className = filteredClasses.join(' ');
-}
-
 function main() {
     document.querySelectorAll("c-wiz[data-topic-id]")
         .forEach(
