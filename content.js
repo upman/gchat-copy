@@ -13,7 +13,7 @@ function addStyle() {
             line-height: 1.25rem;
             color: #1967d2;
             padding: 0 12px;
-            line-height: 24px;
+            height: 24px;
             display: inline-flex;
             align-items: center;
             cursor: pointer;
@@ -26,17 +26,6 @@ function addStyle() {
 
         .gchat-xtra-copy:active {
             background-color: rgba(26,115,232,0.122)
-        }
-
-        .gchat-xtra-copy-icon {
-            width: 14px;
-            height: 14px;
-        }
-
-        .gchat-xtra-copy-icon-container {
-            padding-right: 4px;
-            display: inline-flex;
-            margin: 0 auto;
         }
 
         [data-tooltip] {
@@ -129,25 +118,6 @@ function main() {
                     var copyButton = document.createElement("div");
                     copyButton.className="gchat-xtra-copy";
                     copyButton.innerHTML = `
-                        <div class="gchat-xtra-copy-icon-container">
-                            <svg height="14px" width="14px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                viewBox="0 0 477.867 477.867" style="enable-background:new 0 0 477.867 477.867;" xml:space="preserve">
-                                <g>
-                                    <g>
-                                        <path d="M341.333,85.333H51.2c-28.277,0-51.2,22.923-51.2,51.2v290.133c0,28.277,22.923,51.2,51.2,51.2h290.133
-                                            c28.277,0,51.2-22.923,51.2-51.2V136.533C392.533,108.256,369.61,85.333,341.333,85.333z M358.4,426.667
-                                            c0,9.426-7.641,17.067-17.067,17.067H51.2c-9.426,0-17.067-7.641-17.067-17.067V136.533c0-9.426,7.641-17.067,17.067-17.067
-                                            h290.133c9.426,0,17.067,7.641,17.067,17.067V426.667z"/>
-                                    </g>
-                                    <g>
-                                        <path d="M426.667,0h-307.2c-28.277,0-51.2,22.923-51.2,51.2c0,9.426,7.641,17.067,17.067,17.067S102.4,60.626,102.4,51.2
-                                            s7.641-17.067,17.067-17.067h307.2c9.426,0,17.067,7.641,17.067,17.067v307.2c0,9.426-7.641,17.067-17.067,17.067
-                                            s-17.067,7.641-17.067,17.067s7.641,17.067,17.067,17.067c28.277,0,51.2-22.923,51.2-51.2V51.2
-                                            C477.867,22.923,454.944,0,426.667,0z"/>
-                                    </g>
-                                </g>
-                            </svg>
-                        </div>
                         Copy thread link
                     `;
                     copyButton.addEventListener('click', function() {
