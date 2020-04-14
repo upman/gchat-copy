@@ -4,7 +4,7 @@ function addStyle() {
         .gchat-xtra-copy {
             margin-left: 4px;
             border: 1px solid #dadce0;
-            background-color: #fff;
+            background-color: transparent;
             border-radius: 12px;
             box-sizing: border-box;
             font-family: 'Google Sans',Arial,sans-serif;
