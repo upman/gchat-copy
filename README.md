@@ -10,3 +10,7 @@ Or clone `git@github.com/upman/gchat-copy.git` if you are comfortable with Git
 3. In Chrome, go to 'Settings > Extensions'
 4. Enable 'Developer mode'
 5. Click on 'Load unpacked extension...' and select the folder that you unzipped
+
+## Firefox
+
+Install this forked tampermonkey script: https://greasyfork.org/en/scripts/400283-copy-gchat-link
