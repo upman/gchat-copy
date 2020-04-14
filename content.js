@@ -28,13 +28,13 @@ function addStyle() {
             background-color: rgba(26,115,232,0.122)
         }
 
-        [data-tooltip] {
+        .gchat-xtra-copy[data-tooltip] {
             position: relative;
         }
 
         /* Base styles for the entire tooltip */
-        [data-tooltip]:before,
-        [data-tooltip]:after {
+        .gchat-xtra-copy[data-tooltip]:before,
+        .gchat-xtra-copy[data-tooltip]:after {
             position: absolute;
             visibility: hidden;
             opacity: 0;
@@ -47,16 +47,16 @@ function addStyle() {
         }
 
         /* Show the entire tooltip on hover and focus */
-        [data-tooltip]:hover:before,
-        [data-tooltip]:hover:after,
-        [data-tooltip]:focus:before,
-        [data-tooltip]:focus:after {
+        .gchat-xtra-copy[data-tooltip]:hover:before,
+        .gchat-xtra-copy[data-tooltip]:hover:after,
+        .gchat-xtra-copy[data-tooltip]:focus:before,
+        .gchat-xtra-copy[data-tooltip]:focus:after {
             visibility: visible;
             opacity: 1;
         }
 
         /* Base styles for the tooltip's directional arrow */
-        [data-tooltip]:before {
+        .gchat-xtra-copy[data-tooltip]:before {
             z-index: 1001;
             border: 6px solid transparent;
             background: transparent;
@@ -64,7 +64,7 @@ function addStyle() {
         }
 
         /* Base styles for the tooltip's content area */
-        [data-tooltip]:after {
+        .gchat-xtra-copy[data-tooltip]:after {
             z-index: 1000;
             padding: 8px;
             background-color: #000;
@@ -78,13 +78,13 @@ function addStyle() {
         /* Directions */
 
         /* Top (default) */
-        [data-tooltip]:before,
-        [data-tooltip]:after {
+        .gchat-xtra-copy[data-tooltip]:before,
+        .gchat-xtra-copy[data-tooltip]:after {
             bottom: 100%;
             left: 50%;
         }
 
-        [data-tooltip]:before {
+        .gchat-xtra-copy[data-tooltip]:before {
             margin-left: -6px;
             margin-bottom: -12px;
             border-top-color: #000;
@@ -92,14 +92,14 @@ function addStyle() {
         }
 
         /* Horizontally align top/bottom tooltips */
-        [data-tooltip]:after {
+        .gchat-xtra-copy[data-tooltip]:after {
             margin-left: -30px;
         }
 
-        [data-tooltip]:hover:before,
-        [data-tooltip]:hover:after,
-        [data-tooltip]:focus:before,
-        [data-tooltip]:focus:after {
+        .gchat-xtra-copy[data-tooltip]:hover:before,
+        .gchat-xtra-copy[data-tooltip]:hover:after,
+        .gchat-xtra-copy[data-tooltip]:focus:before,
+        .gchat-xtra-copy[data-tooltip]:focus:after {
             -webkit-transform: translateY(-12px);
             -moz-transform:    translateY(-12px);
             transform:         translateY(-12px);
