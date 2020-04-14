@@ -110,6 +110,7 @@ function addStyle() {
 }
 
 function main() {
+    var scrollContainer = document.querySelector('c-wiz[data-group-id][data-is-client-side] > div:nth-child(1)');
     document.querySelectorAll("c-wiz[data-topic-id]")
         .forEach(
             function(e,t,i){
@@ -145,6 +146,7 @@ function main() {
 
                         buttonContainer.parentElement.style = 'display: inline-block; width: unset; opacity: 1;';
                         buttonContainer.parentElement.parentElement.appendChild(copyButton);
+                        scrollContainer.scrollTop += 72;
                         buttonContainer.parentElement.parentElement.parentElement.parentElement.style = 'padding: 56px 0;';
                     }
                 }
