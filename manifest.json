@@ -2,7 +2,7 @@
 "manifest_version": 2,
     "name": "Google Chat thread links",
     "description": "Adds button to copy links to threads on Google Chat",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "content_scripts": [
         {
             "matches": [

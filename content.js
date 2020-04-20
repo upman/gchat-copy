@@ -124,7 +124,9 @@ function main() {
                     `;
                     copyButton.addEventListener('click', function() {
                         const el = document.createElement('textarea');
-                        el.value = window.location.href+"/"+e.getAttribute("data-topic-id");
+                        el.value = window.location.origin +
+                            window.location.pathname +
+                            e.getAttribute("data-topic-id");
                         document.body.appendChild(el);
                         el.select();
                         document.execCommand('copy');
