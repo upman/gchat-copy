@@ -126,6 +126,7 @@ function main() {
                         const el = document.createElement('textarea');
                         el.value = window.location.origin +
                             window.location.pathname +
+                            (window.location.pathname[window.location.pathname.length - 1] === '/' ? '' : '/') +
                             e.getAttribute("data-topic-id");
                         document.body.appendChild(el);
                         el.select();
