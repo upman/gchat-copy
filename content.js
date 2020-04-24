@@ -124,10 +124,9 @@ function main() {
                     `;
                     copyButton.addEventListener('click', function() {
                         const el = document.createElement('textarea');
-                        el.value = window.location.origin +
-                            window.location.pathname +
-                            (window.location.pathname[window.location.pathname.length - 1] === '/' ? '' : '/') +
-                            e.getAttribute("data-topic-id");
+                        const roomId = window.location.pathname.match(/\/room\/([^\?\/]*)/)[1];
+                        const threadId = e.getAttribute("data-topic-id");
+                        el.value = `https://chat.google.com/room/${roomId}/${threadId}`;
                         document.body.appendChild(el);
                         el.select();
                         document.execCommand('copy');
