@@ -1,7 +1,8 @@
 # Google Chat Thread Links
 A chrome extension that adds a button to copy the thread link for every thread on Google Chat.
+It also adds a button on each message to quote reply to them.
 
-![Screenshot](https://i.imgur.com/KRcFjve.png)
+![Screenshot](https://i.imgur.com/u03ekMc.jpg)
 
 ## Install from Chrome Web Store
 Visit the extension page at [this link](https://chrome.google.com/webstore/detail/google-chat-thread-links/aogkhbmeeckelbhfemleoajbglamokbc) and click on Add to Chrome.
