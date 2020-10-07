@@ -1,8 +1,8 @@
 {
 "manifest_version": 2,
-    "name": "Google Chat thread links",
-    "description": "Adds button to copy links to threads on Google Chat",
-    "version": "0.0.6",
+    "name": "Google Chat thread links & quote reply",
+    "description": "Adds button to copy links to threads on Google Chat and adds button to messages to quote reply",
+    "version": "0.0.7",
     "content_scripts": [
         {
             "matches": [
