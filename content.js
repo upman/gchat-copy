@@ -161,7 +161,10 @@ function main() {
                 e.querySelectorAll('div[data-tooltip="Add reaction"]').forEach(
                     // Adding quote message buttons
                     function(addreactionButton) {
-                        if (addreactionButton.parentElement.parentElement.querySelector('[data-tooltip*="Quote Message"')) {
+                        if (
+                            addreactionButton.parentElement.parentElement.querySelector('[data-tooltip*="Quote Message"') || // Quote reply button already exists
+                            addreactionButton.parentElement.parentElement.children.length === 1 // Add reaction button next to existing emoji reactions to a message
+                        ) {
                             return;
                         }
                         const container = document.createElement('div');
