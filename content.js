@@ -230,6 +230,13 @@ function main() {
     if (copyButtonInsertedCount > 1) {
         scrollContainer.scrollTop += 36;
     }
+
+    // removes GitHub Enterprise and Google sign-in previews
+    document.querySelectorAll('a[aria-label="Build software better, together, Web Page."],a[aria-label$="Google Accounts, Web Page."]').forEach(
+        function(a) {
+            a.parentElement.parentElement.style = 'display: none;';
+        }
+    );
 }
 
 function getQuoteText(messageContainer) {
