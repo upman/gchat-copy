@@ -104,6 +104,12 @@ function addStyle() {
             -moz-transform:    translateY(-12px);
             transform:         translateY(-12px);
         }
+
+        /* Removes GitHub Enterprise and Google sign-in previews since they always show up empty */
+        a[aria-label="Build software better, together, Web Page."],
+        a[aria-label$="Google Accounts, Web Page."] {
+            display: none;
+        }
     `));
 
     document.head.appendChild(styleElement);
