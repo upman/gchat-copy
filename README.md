@@ -3,7 +3,7 @@ A chrome extension that adds a button to copy the thread link for every thread o
 Adds a button on each message to quote reply to them.
 Also hides GitHub Enterprise and Google sign-in previews since they always show up empty in google chat.
 
-![Screenshot](https://i.imgur.com/xA3nAb5.jpg)
+![Screenshot](https://i.imgur.com/GHcNQ7c.png)
 
 ## Install from Chrome Web Store
 Visit the extension page at [this link](https://chrome.google.com/webstore/detail/google-chat-thread-links/aogkhbmeeckelbhfemleoajbglamokbc) and click on Add to Chrome.
