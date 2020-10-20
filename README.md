@@ -1,6 +1,7 @@
 # Google Chat Thread Links & Quote Reply
 A chrome extension that adds a button to copy the thread link for every thread on Google Chat.
-It also adds a button on each message to quote reply to them.
+Adds a button on each message to quote reply to them.
+Also hides GitHub Enterprise and Google sign-in previews since they always show up empty in google chat.
 
 ![Screenshot](https://i.imgur.com/xA3nAb5.jpg)
 
