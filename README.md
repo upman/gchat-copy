@@ -18,4 +18,4 @@ Or clone `git@github.com/upman/gchat-copy.git` if you are comfortable with Git
 
 ## Firefox
 
-Install this forked tampermonkey script: https://greasyfork.org/en/scripts/400283-copy-gchat-link
+Install `tampermonkey.js` on your tampermonkey firefox plugin
