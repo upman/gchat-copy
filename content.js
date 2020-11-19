@@ -249,7 +249,7 @@ function makeInputText(name, quoteText, inputEl, messageContainer) {
     var selection = window.getSelection().toString();
     var text = getText(messageContainer);
     var oneLineQuote = '';
-    if (selection && text.includes(selection)) {
+    if (selection && text.includes(selection) && selection.trim()) {
         var regexp = new RegExp('(.*)' + selection + '(.*)');
         var matches = regexp.exec(text);
         if (matches[1]) {
