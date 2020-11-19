@@ -227,7 +227,8 @@ function main() {
                                 if (!inputEl) {
                                     return;
                                 }
-                                inputEl.innerHTML = "```\n" + name + ":\n" + quoteText + "\n```\n" + inputEl.innerHTML;
+
+                                inputEl.innerHTML = makeInputText(name, quoteText, inputEl, messageContainer);
                                 inputEl.scrollIntoView();
                                 inputEl.click();
                                 placeCaretAtEnd(inputEl);
@@ -240,6 +241,36 @@ function main() {
 
     if (copyButtonInsertedCount > 1) {
         scrollContainer.scrollTop += 36;
+    }
+}
+
+function makeInputText(name, quoteText, inputEl, messageContainer) {
+    var isDM = window.location.href.includes('/dm/');
+    var selection = window.getSelection().toString();
+    var text = getText(messageContainer);
+    var oneLineQuote = '';
+    if (selection && text.includes(selection)) {
+        var regexp = new RegExp('(.*)' + selection + '(.*)');
+        var matches = regexp.exec(text);
+        if (matches[1]) {
+            // Has text before the match
+            oneLineQuote += '... ';
+        }
+        oneLineQuote += selection.trim();
+
+        if (matches[2]) {
+            // Has text after the match
+            oneLineQuote += ' ...';
+        }
+    }
+
+    if(isDM) {
+        return oneLineQuote ? '`' + oneLineQuote + '`\n' :
+            ("```\n" + quoteText + "\n```\n" + inputEl.innerHTML)
+    } else {
+
+        return oneLineQuote ? '`' + name + ': ' + oneLineQuote + '`\n' :
+            ("```\n" + name + ":\n" + quoteText + "\n```\n" + inputEl.innerHTML);
     }
 }
 
