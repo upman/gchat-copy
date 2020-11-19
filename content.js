@@ -119,7 +119,7 @@ function main() {
     var scrollContainer = document.querySelector('c-wiz[data-group-id][data-is-client-side] > div:nth-child(1)');
     var copyButtonInsertedCount = 0;
     // Iterating on threads and in the case of DMs, the whole message history is one thread
-    document.querySelectorAll("c-wiz[data-topic-id]")
+    document.querySelectorAll("c-wiz[data-topic-id][data-local-topic-id]")
         .forEach(
             function(e,t,i){
                 var copy = e.querySelector('.gchat-xtra-copy');
@@ -164,7 +164,7 @@ function main() {
                 }
 
                 // Iterating on each message in the thread
-                e.querySelectorAll('div[data-tooltip="Add reaction"]').forEach(
+                e.querySelectorAll('div[jscontroller="VXdfxd"]').forEach(
                     // Adding quote message buttons
                     function(addreactionButton) {
                         if (
@@ -182,7 +182,12 @@ function main() {
                         container.className=addreactionButton.className;
                         container.setAttribute('data-tooltip', 'Quote Message');
                         const quoteSVG = container.children[0]
-                        addreactionButton.querySelector('svg').classList.forEach(c => quoteSVG.classList.add(c));
+                        const svg = addreactionButton.querySelector('svg');
+                        if (svg) {
+                            svg.classList.forEach(c => quoteSVG.classList.add(c));
+                        } else {
+                            return;
+                        }
 
                         var elRef = addreactionButton;
                         // Find parent container of the message
