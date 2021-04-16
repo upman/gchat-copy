@@ -1,5 +1,5 @@
 function addStyle() {
-    var styleElement = document.createElement('style', { type: 'text/css'});
+    var styleElement = document.createElement('style', { type: 'text/css' });
     styleElement.appendChild(document.createTextNode(`
         .gchat-xtra-copy {
             margin-left: 4px;
@@ -121,16 +121,16 @@ function main() {
     // Iterating on threads and in the case of DMs, the whole message history is one thread
     document.querySelectorAll("c-wiz[data-topic-id][data-local-topic-id]")
         .forEach(
-            function(e,t,i){
+            function (e, t, i) {
                 var copy = e.querySelector('.gchat-xtra-copy');
-                if(e.getAttribute("data-topic-id") && !copy){
+                if (e.getAttribute("data-topic-id") && !copy) {
                     // Adding copy thread link buttons to thread
                     var copyButton = document.createElement("div");
-                    copyButton.className="gchat-xtra-copy";
+                    copyButton.className = "gchat-xtra-copy";
                     copyButton.innerHTML = `
                         Copy thread link
                     `;
-                    copyButton.addEventListener('click', function() {
+                    copyButton.addEventListener('click', function () {
                         const el = document.createElement('textarea');
                         const roomId = window.location.pathname.match(/\/room\/([^\?\/]*)/)[1];
                         const threadId = e.getAttribute("data-topic-id");
@@ -141,7 +141,7 @@ function main() {
                         document.body.removeChild(el);
 
                         copyButton.setAttribute('data-tooltip', 'Copied');
-                        setTimeout(function() {
+                        setTimeout(function () {
                             copyButton.removeAttribute('data-tooltip');
                         }, 1000);
                     });
@@ -166,7 +166,7 @@ function main() {
                 // Iterating on each message in the thread
                 e.querySelectorAll('div[jscontroller="VXdfxd"]').forEach(
                     // Adding quote message buttons
-                    function(addreactionButton) {
+                    function (addreactionButton) {
                         if (
                             addreactionButton.parentElement.parentElement.querySelector('[data-tooltip*="Quote Message"') || // Quote reply button already exists
                             addreactionButton.parentElement.parentElement.children.length === 1 // Add reaction button next to existing emoji reactions to a message
@@ -179,7 +179,7 @@ function main() {
                             <svg viewBox="0 0 24 24" width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" style="margin-top: 4px">
                                 <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 8v3.701c0 2.857-1.869 4.779-4.5 5.299l-.498-1.063c1.219-.459 2.001-1.822 2.001-2.929h-2.003v-5.008h5zm6 0v3.701c0 2.857-1.869 4.779-4.5 5.299l-.498-1.063c1.219-.459 2.001-1.822 2.001-2.929h-2.003v-5.008h5z"/>
                             </svg>`;
-                        container.className=addreactionButton.className;
+                        container.className = addreactionButton.className;
                         container.setAttribute('data-tooltip', 'Quote Message');
                         const quoteSVG = container.children[0]
                         const svg = addreactionButton.querySelector('svg');
@@ -193,14 +193,14 @@ function main() {
                         // Find parent container of the message
                         // These messages are then grouped together when they are from the recipient
                         // and the upper most one has the name and time of the message
-                        while(!(elRef.className && elRef.className.includes('nF6pT')) && elRef.parentElement) {
+                        while (!(elRef.className && elRef.className.includes('nF6pT')) && elRef.parentElement) {
                             elRef = elRef.parentElement;
                         }
                         if (elRef.className.includes('nF6pT')) {
 
-                            var messageIndex, name;
+                            var messageIndex, name, time;
                             [...elRef.parentElement.children].forEach((messageEl, index) => {
-                                if (messageEl ===  elRef) {
+                                if (messageEl === elRef) {
                                     messageIndex = index;
                                 }
                             });
@@ -211,9 +211,8 @@ function main() {
                                     if (elRef.parentElement.children[messageIndex].className.includes('AnmYv')) {
                                         const nameContainer = elRef.parentElement.children[messageIndex].querySelector('[data-hovercard-id], [data-member-id]');
                                         name = nameContainer.getAttribute('data-name');
+                                        time = new Date(parseInt(elRef.parentElement.children[messageIndex].querySelector('span[data-absolute-timestamp]').getAttribute('data-absolute-timestamp')));
                                         break;
-                                        // Can extract time, but adding it into static text surrounded by relative time that's rendered in the chats will only confuse people
-                                        // time = el.Ref.parentElement.children[messageIndex].querySelector('span[data-absolute-timestamp]').getAttribute('data-absolute-timestamp');
                                     }
                                     messageIndex -= 1;
                                 }
@@ -228,7 +227,7 @@ function main() {
                                     return;
                                 }
 
-                                inputEl.innerHTML = makeInputText(name, quoteText, inputEl, messageContainer);
+                                inputEl.innerHTML = makeInputText(name, time, quoteText, inputEl, messageContainer);
                                 inputEl.scrollIntoView();
                                 inputEl.click();
                                 placeCaretAtEnd(inputEl);
@@ -244,8 +243,9 @@ function main() {
     }
 }
 
-function makeInputText(name, quoteText, inputEl, messageContainer) {
-    var isDM = window.location.href.includes('/dm/');
+function makeInputText(name, time, quoteText, inputEl, messageContainer) {
+    //var isDM = window.location.href.includes('/dm/');
+    var messageTime = time.getHours().toString().padStart(2, "0") + ":" + time.getMinutes().toString().padStart(2, "0");
     var selection = window.getSelection().toString();
     var text = getText(messageContainer);
     var oneLineQuote = '';
@@ -254,24 +254,19 @@ function makeInputText(name, quoteText, inputEl, messageContainer) {
         var matches = regexp.exec(text);
         if (matches[1]) {
             // Has text before the match
-            oneLineQuote += '... ';
+            oneLineQuote += '[...] ';
         }
         oneLineQuote += selection.trim();
 
         if (matches[2]) {
             // Has text after the match
-            oneLineQuote += ' ...';
+            oneLineQuote += ' [...]';
         }
     }
 
-    if(isDM) {
-        return oneLineQuote ? '`' + oneLineQuote + '`\n' :
-            ("```\n" + quoteText + "\n```\n" + inputEl.innerHTML)
-    } else {
-
-        return oneLineQuote ? '`' + name + ': ' + oneLineQuote + '`\n' :
-            ("```\n" + name + ":\n" + quoteText + "\n```\n" + inputEl.innerHTML);
-    }
+    return oneLineQuote
+        ? '_[' + messageTime + '] *' + name + ':* ' + oneLineQuote.replace(/\n/g, '_\n_') + '_\n\n'
+        : '_[' + messageTime + '] *' + name + ':*_\n_' + quoteText.replace(/\n/g, '_\n_') + '_\n\n' + inputEl.innerHTML;
 }
 
 function getQuoteText(messageContainer) {
@@ -279,8 +274,8 @@ function getQuoteText(messageContainer) {
     var videoCall = messageContainer.querySelector('a[href*="https://meet.google.com/"]');
     var image = messageContainer.querySelector('a img[alt]');
     var text = regularText ||
-        (videoCall ? "🎥: " + videoCall.href: null) ||
-        (image ? "📷: " + image.alt: null) ||
+        (videoCall ? "🎥: " + videoCall.href : null) ||
+        (image ? "📷: " + image.alt : null) ||
         '...';
 
     return truncateQuoteText(text);
@@ -288,7 +283,7 @@ function getQuoteText(messageContainer) {
 
 function truncateQuoteText(text) {
     let splitText = text.split('\n');
-    let quoteText = splitText.slice(0,3).join('\n') + (splitText.length > 3 ? '\n...' : '');
+    let quoteText = splitText.slice(0, 3).join('\n') + (splitText.length > 3 ? '\n...' : '');
     if (quoteText.length > 280) {
         quoteText = quoteText.slice(0, 280) + ' ...';
     }
@@ -320,7 +315,7 @@ function getText(messageContainer) {
 function placeCaretAtEnd(el) {
     el.focus();
     if (typeof window.getSelection != "undefined"
-            && typeof document.createRange != "undefined") {
+        && typeof document.createRange != "undefined") {
         var range = document.createRange();
         range.selectNodeContents(el);
         range.collapse(false);
@@ -339,11 +334,11 @@ function placeCaretAtEnd(el) {
 
 function debounce(fn, delay) {
     var timeout = null;
-    return function() {
-        if(timeout) {
+    return function () {
+        if (timeout) {
             return;
         } else {
-            timeout = setTimeout(function() {
+            timeout = setTimeout(function () {
                 fn();
                 timeout = null;
             }, delay);
