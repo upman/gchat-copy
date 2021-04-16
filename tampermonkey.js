@@ -209,7 +209,7 @@
                             }
                             if (elRef.className.includes('nF6pT')) {
     
-                                var messageIndex, name;
+                                var messageIndex, name, time;
                                 [...elRef.parentElement.children].forEach((messageEl, index) => {
                                     if (messageEl ===  elRef) {
                                         messageIndex = index;
@@ -222,9 +222,8 @@
                                         if (elRef.parentElement.children[messageIndex].className.includes('AnmYv')) {
                                             const nameContainer = elRef.parentElement.children[messageIndex].querySelector('[data-hovercard-id], [data-member-id]');
                                             name = nameContainer.getAttribute('data-name');
+                                            time = new Date(parseInt(elRef.parentElement.children[messageIndex].querySelector('span[data-absolute-timestamp]').getAttribute('data-absolute-timestamp')));
                                             break;
-                                            // Can extract time, but adding it into static text surrounded by relative time that's rendered in the chats will only confuse people
-                                            // time = el.Ref.parentElement.children[messageIndex].querySelector('span[data-absolute-timestamp]').getAttribute('data-absolute-timestamp');
                                         }
                                         messageIndex -= 1;
                                     }
@@ -239,7 +238,7 @@
                                         return;
                                     }
     
-                                    inputEl.innerHTML = makeInputText(name, quoteText, inputEl, messageContainer);
+                                    inputEl.innerHTML = makeInputText(name, time, quoteText, inputEl, messageContainer);
                                     inputEl.scrollIntoView();
                                     inputEl.click();
                                     placeCaretAtEnd(inputEl);
@@ -255,8 +254,9 @@
         }
     }
     
-    function makeInputText(name, quoteText, inputEl, messageContainer) {
-        var isDM = window.location.href.includes('/dm/');
+    function makeInputText(name, time, quoteText, inputEl, messageContainer) {
+        //var isDM = window.location.href.includes('/dm/');
+        var messageTime = time.getHours().toString().padStart(2, "0") + ":" + time.getMinutes().toString().padStart(2, "0");
         var selection = window.getSelection().toString();
         var text = getText(messageContainer);
         var oneLineQuote = '';
@@ -265,24 +265,19 @@
             var matches = regexp.exec(text);
             if (matches[1]) {
                 // Has text before the match
-                oneLineQuote += '... ';
+                oneLineQuote += '[...] ';
             }
             oneLineQuote += selection.trim();
     
             if (matches[2]) {
                 // Has text after the match
-                oneLineQuote += ' ...';
+                oneLineQuote += ' [...]';
             }
         }
     
-        if(isDM) {
-            return oneLineQuote ? '`' + oneLineQuote + '`\n' :
-                ("```\n" + quoteText + "\n```\n" + inputEl.innerHTML)
-        } else {
-    
-            return oneLineQuote ? '`' + name + ': ' + oneLineQuote + '`\n' :
-                ("```\n" + name + ":\n" + quoteText + "\n```\n" + inputEl.innerHTML);
-        }
+        return oneLineQuote
+            ? '_[' + messageTime + '] *' + name + ':* ' + oneLineQuote.replace(/\n/g, '_\n_') + '_\n\n'
+            : '_[' + messageTime + '] *' + name + ':*_\n_' + quoteText.replace(/\n/g, '_\n_') + '_\n\n' + inputEl.innerHTML;
     }
     
     function getQuoteText(messageContainer) {
