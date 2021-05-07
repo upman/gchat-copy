@@ -6,12 +6,13 @@
     "content_scripts": [
         {
             "matches": [
-                "https://chat.google.com/*"
+                "https://mail.google.com/chat/*","https://chat.google.com/*"
             ],
             "js": [
                 "content.js"
             ],
-            "run_at": "document_end"
+            "run_at": "document_end",
+            "all_frames": true
         }
     ]
 }
