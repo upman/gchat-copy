@@ -1,6 +1,6 @@
 # Google Chat Tweaks
 
-This is a fork of the original [Chrome Extension](https://github.com/upman/gchat-copy) by (upman)[https://github.com/upman]. It has been updated to function with the updated Chat PWA recently released by Google that is now more integrated an consistent with the GMail interface.
+This is a fork of the original [Chrome Extension](https://github.com/upman/gchat-copy) by [upman](https://github.com/upman). It has been updated to function with the updated Chat PWA recently released by Google that is now more integrated an consistent with the GMail interface.
 
 This is a chrome extension that adds a button to copy the thread link for every thread on Google Chat.
 Adds a button on each message to quote reply to them.
