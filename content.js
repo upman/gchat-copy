@@ -17,7 +17,7 @@ function addStyle() {
             display: inline-flex;
             align-items: center;
             cursor: pointer;
-            /*It has a lot to be fixed, Do not get into making it visible; As of 20th May 2021, You can't make it*/
+            /*It has a lot to be fixed, Do not get into making it visible; As of 20th May 2021, You can't make it work easily*/
             display:none;
         }
 
