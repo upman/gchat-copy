@@ -17,6 +17,8 @@ function addStyle() {
             display: inline-flex;
             align-items: center;
             cursor: pointer;
+            /*It has a lot to be fixed, Do not get into making it visible; As of 20th May 2021, You can't make it*/
+            display:none;
         }
 
         .gchat-xtra-copy:hover {
@@ -114,7 +116,7 @@ function addStyle() {
 
     document.head.appendChild(styleElement);
 }
-
+const pluginMsg=", Install 'gchat copy' extension to have it working";
 function main() {
     var scrollContainer = document.querySelector('c-wiz[data-group-id][data-is-client-side] > div:nth-child(1)');
     var copyButtonInsertedCount = 0;
@@ -127,14 +129,15 @@ function main() {
                     // Adding copy thread link buttons to thread
                     var copyButton = document.createElement("div");
                     copyButton.className="gchat-xtra-copy";
+                    copyButton.setAttribute('data-topic-id',e.getAttribute("data-topic-id"));
                     copyButton.innerHTML = `
                         Copy thread link
                     `;
                     copyButton.addEventListener('click', function() {
                         const el = document.createElement('textarea');
-                        const roomId = window.location.pathname.match(/\/room\/([^\?\/]*)/)[1];
-                        const threadId = e.getAttribute("data-topic-id");
-                        el.value = `https://chat.google.com/room/${roomId}/${threadId}`;
+                        // const roomId = window.location.pathname.match(/\/room\/([^\?\/]*)/)[1];
+                        const threadId = `GoTo#${e.getAttribute("data-topic-id")}${pluginMsg}`;
+                        el.value = threadId;
                         document.body.appendChild(el);
                         el.select();
                         document.execCommand('copy');
@@ -179,7 +182,7 @@ function main() {
                             <svg viewBox="0 0 24 24" width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" style="margin-top: 4px">
                                 <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 8v3.701c0 2.857-1.869 4.779-4.5 5.299l-.498-1.063c1.219-.459 2.001-1.822 2.001-2.929h-2.003v-5.008h5zm6 0v3.701c0 2.857-1.869 4.779-4.5 5.299l-.498-1.063c1.219-.459 2.001-1.822 2.001-2.929h-2.003v-5.008h5z"/>
                             </svg>`;
-                        container.className=addreactionButton.className;
+                        container.className = addreactionButton.className;
                         container.setAttribute('data-tooltip', 'Quote Message');
                         const quoteSVG = container.children[0]
                         const svg = addreactionButton.querySelector('svg');
@@ -196,6 +199,25 @@ function main() {
                         while(!(elRef.className && elRef.className.includes('nF6pT')) && elRef.parentElement) {
                             elRef = elRef.parentElement;
                         }
+
+                        document.querySelectorAll('.QIJiHb').forEach((a)=>{
+                            if(a.textContent.includes(pluginMsg)) {
+                                try {
+                                    const topicId = a.textContent.replace(pluginMsg, '').replace("GoTo#", '');
+                                    if (document.querySelector(`c-wiz[data-topic-id=${topicId}]`)) {
+                                        a.innerHTML = `<a topic="${topicId}" href="javascript:void(0)" style="cursor: pointer">${a.textContent.replace(pluginMsg, '')}</a>`
+                                        a.addEventListener('click', (e) => {
+                                            document.querySelector(`c-wiz[data-topic-id=${topicId}]`).scrollIntoView();
+                                        });
+                                    } else {
+                                        a.innerHTML = `<b>GChat Reference is not found in current space. Cross space reference is not supported as of now</b>`
+                                    }
+                                }catch (e){
+                                    console.log(e);
+                                }
+                            }
+                        })
+
                         if (elRef.className.includes('nF6pT')) {
 
                             var messageIndex, name;
