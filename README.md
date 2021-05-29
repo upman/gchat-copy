@@ -19,3 +19,10 @@ Or clone `git@github.com/upman/gchat-copy.git` if you are comfortable with Git
 ## Firefox
 
 Install `tampermonkey.js` on your tampermonkey firefox plugin
+
+## Buy me a coffee
+[
+  ![Donate with PayPal]
+  (https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png)
+]
+(https://www.paypal.com/donate?hosted_button_id=BL4NDDVH8AGUY)
