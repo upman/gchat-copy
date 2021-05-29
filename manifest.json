@@ -6,8 +6,10 @@
     "content_scripts": [
         {
             "matches": [
-                "https://chat.google.com/*"
+                "https://chat.google.com/*",
+                "https://mail.google.com/chat/*"
             ],
+            "all_frames": true,
             "js": [
                 "content.js"
             ],

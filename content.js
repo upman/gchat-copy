@@ -115,6 +115,14 @@ function addStyle() {
     document.head.appendChild(styleElement);
 }
 
+function inIframe () {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
+}
+
 function main() {
     var scrollContainer = document.querySelector('c-wiz[data-group-id][data-is-client-side] > div:nth-child(1)');
     var copyButtonInsertedCount = 0;
@@ -132,9 +140,16 @@ function main() {
                     `;
                     copyButton.addEventListener('click', function() {
                         const el = document.createElement('textarea');
-                        const roomId = window.location.pathname.match(/\/room\/([^\?\/]*)/)[1];
                         const threadId = e.getAttribute("data-topic-id");
-                        el.value = `https://chat.google.com/room/${roomId}/${threadId}`;
+                        if (inIframe()) {
+                            // The new mail.google.com/chat application uses iframes that point to chat.google.com
+                            // Rooms are now renamed to spaces. Getting the space id from an attribute in the element
+                            const roomId = e.getAttribute('data-p').match(/space\/([^\\"]*)/)[1];
+                            el.value = `https://mail.google.com/chat/#chat/space/${roomId}/${threadId}`;
+                        } else {
+                            const roomId = window.location.pathname.match(/\/room\/([^\?\/]*)/)[1];
+                            el.value = `https://chat.google.com/room/${roomId}/${threadId}`;
+                        }
                         document.body.appendChild(el);
                         el.select();
                         document.execCommand('copy');
