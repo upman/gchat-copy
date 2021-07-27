@@ -175,6 +175,7 @@ function main() {
                         copyButtonInsertedCount += 1;
                         scrollContainer.scrollTop += 36;
                         buttonContainer.parentElement.parentElement.parentElement.parentElement.style = 'padding-top: 56px;';
+                        buttonContainer.parentElement.parentElement.parentElement.style = 'display: block;';
                     }
                 }
 
