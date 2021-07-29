@@ -107,8 +107,8 @@ function addStyle() {
         }
 
         /* Removes GitHub Enterprise and Google sign-in previews since they always show up empty */
-        a[aria-label="Build software better, together, Web Page."],
-        a[aria-label$="Google Accounts, Web Page."] {
+        a[aria-label][title*="Build software better, together"],
+        a[aria-label][title*="Google Accounts"] {
             display: none;
         }
     `)
@@ -116,6 +116,8 @@ function addStyle() {
 
   document.head.appendChild(styleElement);
 }
+
+var observer;
 
 function main() {
   // Determine if we're on the old or new Chat interface
@@ -190,6 +192,8 @@ function main() {
           buttonContainer.parentElement.parentElement.parentElement.parentElement.style =
             "padding-top: 56px;";
         }
+
+        addCopyThreadButton(e);
       }
 
       // Iterating on each message in the thread
@@ -293,8 +297,60 @@ function main() {
       );
     });
 
+  observeNotificationPreference();
+
   if (copyButtonInsertedCount > 1) {
     scrollContainer.scrollTop += 36;
+  }
+}
+
+function addCopyThreadButton(element) {
+  // If the button container is currently hidden, we want to unhide it, and remove the Following button (as that's not required when the room is set to "Always Notify")
+  // eLNT1d appears to be the class used to hide elements
+  var buttonContainer = element.querySelector(
+    "div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)"
+  );
+
+  if (buttonContainer) {
+    buttonContainer.style = "";
+    var buttonContainer1 = element.querySelector(
+      "div:nth-of-type(2) > div:nth-of-type(1)"
+    );
+    if (buttonContainer1 && buttonContainer1.classList.contains("eLNT1d")) {
+      buttonContainer1.classList.remove("eLNT1d");
+
+      buttonContainer.style = "display:none";
+    }
+  }
+}
+
+function observeNotificationPreference() {
+  // Put an observer on the buttonContainer1 element, so if the notification level is changed, we can rerun this function
+  if (observer) {
+    observer.disconnect();
+  }
+  observer = new MutationObserver(function (event) {
+    observer.disconnect();
+    document
+      .querySelectorAll("c-wiz[data-topic-id][data-local-topic-id]")
+      .forEach(function (e, t, i) {
+        addCopyThreadButton(e);
+      });
+
+    observeNotificationPreference();
+  });
+
+  threadButtonContainers = document.querySelectorAll(".yg4pvb");
+  if (threadButtonContainers.length > 0) {
+    observer.observe(
+      threadButtonContainers[threadButtonContainers.length - 1],
+      {
+        attributes: true,
+        attributeFilter: ["class"],
+        childList: false,
+        characterData: false,
+      }
+    );
   }
 }
 
