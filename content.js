@@ -150,7 +150,7 @@ function main() {
         copyButton.addEventListener("click", function () {
           const el = document.createElement("textarea");
 
-          const roomId = null;
+          let roomId = null;
           const threadId = e.getAttribute("data-topic-id");
           if (isNewChat) {
             // We want the data-group-id from the DOM to determine the link to the room/DM
