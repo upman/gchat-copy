@@ -161,7 +161,7 @@ function main() {
                         }, 1000);
                     });
 
-                    var buttonContainer = e.querySelector('div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)');
+                    var buttonContainer = e.querySelector('div[aria-label="Follow"] > span:first-of-type');
                     if (
                         buttonContainer &&
                         buttonContainer.children.length === 2 &&
