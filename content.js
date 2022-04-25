@@ -161,7 +161,7 @@ function main() {
                         }, 1000);
                     });
 
-                    var buttonContainer = e.querySelector('div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)');
+                    var buttonContainer = e.querySelector('div[aria-label="Follow"] > span:first-of-type');
                     if (
                         buttonContainer &&
                         buttonContainer.children.length === 2 &&
@@ -172,6 +172,10 @@ function main() {
 
                         buttonContainer.parentElement.style = 'display: inline-block; width: unset; opacity: 1;';
                         buttonContainer.parentElement.parentElement.appendChild(copyButton);
+
+                        // Follow button container gets hidden in channels where all notifications are enabled.
+                        // Undo that
+                        buttonContainer.parentElement.parentElement.parentElement.style += '; display: block;';
                         copyButtonInsertedCount += 1;
                         scrollContainer.scrollTop += 36;
                         buttonContainer.parentElement.parentElement.parentElement.parentElement.style = 'padding-top: 56px;';

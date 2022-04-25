@@ -126,6 +126,14 @@
         document.head.appendChild(styleElement);
     }
     
+    function inIframe () {
+        try {
+            return window.self !== window.top;
+        } catch (e) {
+            return true;
+        }
+    }
+    
     function main() {
         var scrollContainer = document.querySelector('c-wiz[data-group-id][data-is-client-side] > div:nth-child(1)');
         var copyButtonInsertedCount = 0;
@@ -143,9 +151,16 @@
                         `;
                         copyButton.addEventListener('click', function() {
                             const el = document.createElement('textarea');
-                            const roomId = window.location.pathname.match(/\/room\/([^\?\/]*)/)[1];
                             const threadId = e.getAttribute("data-topic-id");
-                            el.value = `https://chat.google.com/room/${roomId}/${threadId}`;
+                            if (inIframe()) {
+                                // The new mail.google.com/chat application uses iframes that point to chat.google.com
+                                // Rooms are now renamed to spaces. Getting the space id from an attribute in the element
+                                const roomId = e.getAttribute('data-p').match(/space\/([^\\"]*)/)[1];
+                                el.value = `https://mail.google.com/chat/#chat/space/${roomId}/${threadId}`;
+                            } else {
+                                const roomId = window.location.pathname.match(/\/room\/([^\?\/]*)/)[1];
+                                el.value = `https://chat.google.com/room/${roomId}/${threadId}`;
+                            }
                             document.body.appendChild(el);
                             el.select();
                             document.execCommand('copy');
@@ -157,7 +172,7 @@
                             }, 1000);
                         });
     
-                        var buttonContainer = e.querySelector('div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)');
+                        var buttonContainer = e.querySelector('div[aria-label="Follow"] > span:first-of-type');
                         if (
                             buttonContainer &&
                             buttonContainer.children.length === 2 &&
@@ -168,6 +183,10 @@
     
                             buttonContainer.parentElement.style = 'display: inline-block; width: unset; opacity: 1;';
                             buttonContainer.parentElement.parentElement.appendChild(copyButton);
+    
+                            // Follow button container gets hidden in channels where all notifications are enabled.
+                            // Undo that
+                            buttonContainer.parentElement.parentElement.parentElement.style += '; display: block;';
                             copyButtonInsertedCount += 1;
                             scrollContainer.scrollTop += 36;
                             buttonContainer.parentElement.parentElement.parentElement.parentElement.style = 'padding-top: 56px;';
