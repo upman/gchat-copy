@@ -172,6 +172,10 @@ function main() {
 
                         buttonContainer.parentElement.style = 'display: inline-block; width: unset; opacity: 1;';
                         buttonContainer.parentElement.parentElement.appendChild(copyButton);
+
+                        // Follow button container gets hidden in channels where all notifications are enabled.
+                        // Undo that
+                        buttonContainer.parentElement.parentElement.parentElement.style += '; display: block;';
                         copyButtonInsertedCount += 1;
                         scrollContainer.scrollTop += 36;
                         buttonContainer.parentElement.parentElement.parentElement.parentElement.style = 'padding-top: 56px;';
