@@ -123,6 +123,19 @@ function inIframe () {
     }
 }
 
+function getButtonContainer(thread) {
+    var arialLabelList = ['Follow', 'Seguir', 'Segui', 'Suivre'];
+    var buttonContainer;
+    for (const arialLabel of arialLabelList) {
+        var buttonContainerSelector = `div[aria-label="${arialLabel}"] > span:first-of-type`;
+        buttonContainer = thread.querySelector(buttonContainerSelector);
+        if (buttonContainer) {
+            return buttonContainer;
+        }
+    }
+    return buttonContainer;
+}
+
 function main() {
     var scrollContainer = document.querySelector('c-wiz[data-group-id][data-is-client-side] > div:nth-child(1)');
     var copyButtonInsertedCount = 0;
@@ -161,7 +174,7 @@ function main() {
                         }, 1000);
                     });
 
-                    var buttonContainer = e.querySelector('div[aria-label="Follow"] > span:first-of-type');
+                    var buttonContainer = getButtonContainer(e);
                     if (
                         buttonContainer &&
                         buttonContainer.children.length === 2 &&
