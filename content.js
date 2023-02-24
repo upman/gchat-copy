@@ -230,9 +230,16 @@ function main() {
                                     if (elRef.parentElement.children[messageIndex].className.includes('AnmYv')) {
                                         const nameContainer = elRef.parentElement.children[messageIndex].querySelector('[data-hovercard-id], [data-member-id]');
                                         name = nameContainer.getAttribute('data-name');
+                                        timeStamp = elRef.parentElement.children[messageIndex].querySelector('span[data-absolute-timestamp]').getAttribute('data-absolute-timestamp');
+                                        const df = new Date(parseInt(timeStamp));
+                                        time = df.getFullYear()+"-"+
+                                               String((df.getMonth()+1)).padStart(2,'0')+"-"+
+                                               String(df.getDate()).padStart(2,'0')+" "+
+                                               String(df.getHours()).padStart(2,'0')+":"+
+                                               String(df.getMinutes()).padStart(2,'0')+":"+
+                                               String(df.getSeconds()).padStart(2,'0')+" "+
+                                               "UTC-"+(String(Math.floor(df.getTimezoneOffset()/60)).padStart(2,'0'))+":"+String(df.getTimezoneOffset()%60).padStart(2,'0')
                                         break;
-                                        // Can extract time, but adding it into static text surrounded by relative time that's rendered in the chats will only confuse people
-                                        // time = el.Ref.parentElement.children[messageIndex].querySelector('span[data-absolute-timestamp]').getAttribute('data-absolute-timestamp');
                                     }
                                     messageIndex -= 1;
                                 }
@@ -247,7 +254,7 @@ function main() {
                                     return;
                                 }
 
-                                inputEl.innerHTML = makeInputText(name, quoteText, inputEl, messageContainer);
+                                inputEl.innerHTML = makeInputText(name, time, quoteText, inputEl, messageContainer);
                                 inputEl.scrollIntoView();
                                 inputEl.click();
                                 placeCaretAtEnd(inputEl);
@@ -263,7 +270,7 @@ function main() {
     }
 }
 
-function makeInputText(name, quoteText, inputEl, messageContainer) {
+function makeInputText(name, time, quoteText, inputEl, messageContainer) {
     var isDM = window.location.href.includes('/dm/');
     var selection = window.getSelection().toString();
     var text = getText(messageContainer);
@@ -284,12 +291,11 @@ function makeInputText(name, quoteText, inputEl, messageContainer) {
     }
 
     if(isDM) {
-        return oneLineQuote ? '`' + oneLineQuote + '`\n' :
-            ("```\n" + quoteText + "\n```\n" + inputEl.innerHTML)
+        return oneLineQuote ? "(`" + time + "`): " + '`' + oneLineQuote + '`\n' :
+            ("(`" + time + "`): " + "```\n" + quoteText + "\n```\n" + inputEl.innerHTML)
     } else {
-
-        return oneLineQuote ? '`' + name + ': ' + oneLineQuote + '`\n' :
-            ("```\n" + name + ":\n" + quoteText + "\n```\n" + inputEl.innerHTML);
+        return oneLineQuote ? "*" + name + "*" + " (`" + time + "`): " + '`' + oneLineQuote + '`\n' :
+            ("*" + name + "*" + " (`" + time + "`): " + "```\n" + quoteText + "\n```\n" + inputEl.innerHTML);
     }
 }
 
