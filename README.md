@@ -20,5 +20,4 @@ Or clone `git@github.com/upman/gchat-copy.git` if you are comfortable with Git
 
 Install `tampermonkey.js` on your tampermonkey firefox plugin
 
-## Buy me a coffee
-<a href="https://www.paypal.com/donate?hosted_button_id=BL4NDDVH8AGUY"><img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" width="400px" /></a>
+
