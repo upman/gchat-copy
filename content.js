@@ -161,7 +161,7 @@ function main() {
                         }, 1000);
                     });
 
-                    var buttonContainer = e.querySelector('div[aria-label="Follow"] > span:first-of-type');
+                    var buttonContainer = e.querySelector('div[role="checkbox"] > span:first-of-type');
                     if (
                         buttonContainer &&
                         buttonContainer.children.length === 2 &&
