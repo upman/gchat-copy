@@ -244,7 +244,7 @@ function main() {
                                     messageIndex -= 1;
                                 }
 
-                                var messageContainer = addreactionButton.parentElement.parentElement.parentElement.parentElement.children[0];
+                                var messageContainer = addreactionButton.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[0];
                                 var quoteText = getQuoteText(messageContainer);
 
                                 let inputEl = e.querySelector('div[contenteditable="true"]'); // This fetches the input element in channels
