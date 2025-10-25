@@ -1,7 +1,10 @@
 # DECOMMISSIONED
 Google have added a native "copy link" button to messages and threads now. So this extension is no longer relevant and i have paused developed.
 
-We had a good run. Reaching 100k downloads on the chrome web store! 🥳
+We had a good run. Reaching close to 200k users at the peak on the chrome web store! 🥳
+
+<img width="1492" height="621" alt="Screenshot 2025-10-26 at 1 09 07 AM" src="https://github.com/user-attachments/assets/cc9e934d-b8fd-4a4c-9b46-2d855883edf4" />
+
 
 # Google Chat Thread Links & Quote Reply
 A chrome extension that adds a button to copy the thread link for every thread on Google Chat.
