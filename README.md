@@ -1,3 +1,8 @@
+# DECOMMISSIONED
+Google have added a native "copy link" button to messages and threads now. So this extension is no longer relevant and i have paused developed.
+
+We had a good run. Reaching 100k downloads on the chrome web store! 🥳
+
 # Google Chat Thread Links & Quote Reply
 A chrome extension that adds a button to copy the thread link for every thread on Google Chat.
 Adds a button on each message to quote reply to them.
@@ -20,5 +25,3 @@ Or clone `git@github.com/upman/gchat-copy.git` if you are comfortable with Git
 
 Install `tampermonkey.js` on your tampermonkey firefox plugin
 
-## Buy me a coffee
-<a href="https://www.paypal.com/donate?hosted_button_id=BL4NDDVH8AGUY"><img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" width="400px" /></a>
